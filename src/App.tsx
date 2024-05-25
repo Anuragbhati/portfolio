@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Contact from "./components/Contact";
 import Skills from "./components/Skills";
@@ -11,6 +11,7 @@ import {
   FaCode,
   FaProjectDiagram,
   FaEnvelope,
+  FaBars,
 } from "react-icons/fa";
 import WorkExperience from "./components/WorkExperience";
 
@@ -20,48 +21,60 @@ const App: React.FC = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleScroll = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
+    setIsOpen(false); // Close the menu after clicking a link
   };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <header className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-4 fixed w-full z-10">
-        <nav className="flex justify-center space-x-4">
-          <button
-            onClick={() => handleScroll(homeRef)}
-            className="hover:text-gray-300 flex items-center"
-          >
-            <FaHome className="mr-1" /> Home
-          </button>
-          <button
-            onClick={() => handleScroll(aboutRef)}
-            className="hover:text-gray-300 flex items-center"
-          >
-            <FaUser className="mr-1" /> About
-          </button>
-          <button
-            onClick={() => handleScroll(skillsRef)}
-            className="hover:text-gray-300 flex items-center"
-          >
-            <FaCode className="mr-1" /> Skills
-          </button>
-          <button
-            onClick={() => handleScroll(projectsRef)}
-            className="hover:text-gray-300 flex items-center"
-          >
-            <FaProjectDiagram className="mr-1" /> Projects
-          </button>
-          <button
-            onClick={() => handleScroll(contactRef)}
-            className="hover:text-gray-300 flex items-center"
-          >
-            <FaEnvelope className="mr-1" /> Contact
-          </button>
-        </nav>
+        <div className="flex lg:justify-center md:justify-between sm:justify:between items-center">
+          <div>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="block sm:hidden text-white focus:outline-none"
+            >
+              <FaBars />
+            </button>
+          </div>
+          <nav className={`sm:flex ${isOpen ? "block" : "hidden"}`}>
+            <button
+              onClick={() => handleScroll(homeRef)}
+              className="hover:text-gray-300 flex items-center"
+            >
+              <FaHome className="mr-1" /> Home
+            </button>
+            <button
+              onClick={() => handleScroll(aboutRef)}
+              className="hover:text-gray-300 flex items-center"
+            >
+              <FaUser className="mr-1" /> About
+            </button>
+            <button
+              onClick={() => handleScroll(skillsRef)}
+              className="hover:text-gray-300 flex items-center"
+            >
+              <FaCode className="mr-1" /> Skills
+            </button>
+            <button
+              onClick={() => handleScroll(projectsRef)}
+              className="hover:text-gray-300 flex items-center"
+            >
+              <FaProjectDiagram className="mr-1" /> Projects
+            </button>
+            <button
+              onClick={() => handleScroll(contactRef)}
+              className="hover:text-gray-300 flex items-center"
+            >
+              <FaEnvelope className="mr-1" /> Contact
+            </button>
+          </nav>
+        </div>
       </header>
 
       <main className="pt-16">

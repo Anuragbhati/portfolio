@@ -28,22 +28,22 @@ const Home: React.FC = () => {
 
   return (
     <motion.div
-      className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-700 to-black text-white"
+      className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-700 to-black text-white px-4"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.2 }}
-      style={{ cursor: "pointer" }}
     >
       <motion.div
-        className="text-6xl md:text-8xl font-extrabold mb-6 text-center flex space-x-2 justify-center"
+        className="text-6xl md:text-8xl lg:font-extrabold mb-6 text-center flex flex-wrap justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
+        style={{ lineHeight: "1.2" }}
       >
         {name.split("").map((char, index) => (
           <motion.span
             key={index}
-            className=""
+            className="inline-block cursor-pointer"
             whileHover={{
               scale: 1.5,
               color: ["#f87171", "#60a5fa", "#34d399", "#fbbf24"][index % 4],
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
           </motion.span>
         ))}
       </motion.div>
-      <p className="text-xl md:text-2xl mb-8 max-w-2xl text-center">
+      <p className="text-xl md:text-2xl mb-8 max-w-2xl text-center px-4">
         I am a Full Stack Developer with expertise in TypeScript, Node.js,
         React, MongoDB, and Express.
       </p>
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
         className="flex items-center justify-center h-screen"
         overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center"
       >
-        <div className="bg-gray-800 rounded-lg p-8 text-center relative max-w-md mx-auto text-white w-96">
+        <div className="bg-gray-800 rounded-lg p-8 text-center relative max-w-md mx-auto text-white w-11/12 md:w-96">
           <button
             onClick={closeModal}
             className="absolute top-4 right-4 text-gray-400 hover:text-white"
