@@ -1,15 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { projects } from "../data/sampleData";
-import { FaExternalLinkAlt, FaReact, FaNodeJs, FaDatabase } from "react-icons/fa";
+import {
+  FaExternalLinkAlt,
+  FaReact,
+  FaNodeJs,
+  FaDatabase,
+} from "react-icons/fa";
 
 const Projects: React.FC = () => {
-  // Define a mapping from technology names to corresponding icons
   const iconMap: { [key: string]: JSX.Element } = {
     React: <FaReact />,
     NodeJS: <FaNodeJs />,
     MongoDB: <FaDatabase />,
-    // Add more mappings for other technologies as needed
   };
 
   return (
@@ -27,9 +30,11 @@ const Projects: React.FC = () => {
             className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
             whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-75 hover:opacity-0 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-75 hover:opacity-0 transition-opacity duration-300 pointer-events-none"></div>
             <div className="p-6 z-10">
-              <h2 className="text-2xl font-semibold mb-4 text-white">{project.title}</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-white">
+                {project.title}
+              </h2>
               <p className="mb-4 text-gray-300">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag, tagIndex) => (
@@ -44,11 +49,20 @@ const Projects: React.FC = () => {
               </div>
               <a
                 href={project.link}
+                className="flex items-center justify-end text-blue-400 hover:text-blue-500 hover:underline z-20"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-end text-blue-400 hover:text-blue-500 hover:underline"
+                
               >
-                View Project <FaExternalLinkAlt className="ml-1" />
+                {project.status === "in-progress" ? (
+                  <>
+                    <p>In progress </p>
+                  </>
+                ) : (
+                  <>
+                    View Project <FaExternalLinkAlt className="ml-1" />
+                  </>
+                )}
               </a>
             </div>
           </motion.div>

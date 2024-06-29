@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { contactInfo } from '../data/sampleData';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
   return (
@@ -21,10 +21,6 @@ const Contact: React.FC = () => {
           <div className="flex items-center justify-center mb-4 space-x-2">
             <FaPhone className="text-green-500" />
             <p>Phone: <a href={`tel:${contactInfo.phone}`} className="text-green-500 hover:underline">{contactInfo.phone}</a></p>
-          </div>
-          <div className="flex items-center justify-center space-x-2">
-            <FaMapMarkerAlt className="text-red-500" />
-            <p>Address: {contactInfo.address}</p>
           </div>
         </div>
       </div>
