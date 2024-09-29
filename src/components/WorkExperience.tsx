@@ -1,69 +1,130 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { experiences } from "../data/sampleData";
 
 const WorkExperience: React.FC = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 15,
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
-    <motion.div
-      className="container mx-auto p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <h1 className="text-5xl font-bold mb-8 text-center">Work Experience</h1>
-      <div className="relative flex flex-col items-center">
-        <div className="hidden md:block absolute w-1 bg-gray-300 dark:bg-gray-600 h-full"></div>
-        {experiences.map((experience, index) => (
-          <div
-            key={index}
-            className={`flex w-full ${
-              index % 2 === 0 ? "justify-start" : "justify-end"
-            } mb-8`}
-          >
-            <div className={`w-full md:w-1/2 p-4`}>
+    <section className="bg-gradient-to-b from-gray-900 to-black py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={controls}
+        variants={containerVariants}
+        className="max-w-7xl mx-auto"
+      >
+        <motion.h1
+          className="text-5xl md:text-7xl font-extrabold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+          variants={itemVariants}
+        >
+          Work Experience
+        </motion.h1>
+        <AnimatePresence>
+          <motion.div className="relative">
+            <motion.div
+              className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-400 via-pink-500 to-red-500"
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+            ></motion.div>
+            {experiences.map((experience, index) => (
               <motion.div
-                className="flex items-center mb-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                key={index}
+                className={`flex mb-24 ${
+                  index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                }`}
+                variants={itemVariants}
               >
-                <div className="hidden md:block w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded-full mr-4"></div>
-                <div>
-                  <h2 className="text-lg font-semibold">
-                    {experience.company}
-                  </h2>
-                  <p className="text-sm">{experience.position}</p>
-                </div>
-              </motion.div>
-              <motion.div
-                className="mb-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-              >
-                <p>{experience.duration}</p>
-                <p>{experience.location}</p>
-              </motion.div>
-              <motion.ul
-                className="list-disc pl-5"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-              >
-                {experience.responsibilities.map((responsibility, idx) => (
-                  <li
-                    key={idx}
-                    className="mb-2 text-sm md:text-base list-none pl-5 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-4 rounded-lg shadow-lg"
+                <motion.div
+                  className={`w-5/12 ${index % 2 === 0 ? "pr-8" : "pl-8"}`}
+                >
+                  <motion.div
+                    className="bg-gray-800 rounded-lg p-6 shadow-md mb-6"
+                    whileHover={{ scale: 1.05 }}
                   >
-                    {responsibility}
-                  </li>
-                ))}
-              </motion.ul>
-            </div>
-          </div>
-        ))}
-      </div>
-    </motion.div>
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 mb-2">
+                      {experience.company}
+                    </h2>
+                    <p className="text-xl font-semibold text-gray-300 mb-2">
+                      {experience.position}
+                    </p>
+                    <p className="text-sm text-gray-400 mb-1">
+                      {experience.duration}
+                    </p>
+                    <p className="text-sm text-gray-400">
+                      {experience.location}
+                    </p>
+                  </motion.div>
+                  {experience.responsibilities.map((responsibility, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="flex items-center mb-4 relative"
+                      initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 + idx * 0.1 }}
+                    >
+                      <motion.div
+                        className="bg-gray-800 rounded-lg p-3 shadow-md"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <span className="text-gray-300">{responsibility}</span>
+                      </motion.div>
+                      <motion.div
+                        className={`absolute top-1/2 ${
+                          index % 2 === 0 ? "-right-12" : "-left-12"
+                        } w-8 h-0.5 bg-pink-500`}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ delay: 0.3 + idx * 0.1 }}
+                        style={{
+                          transformOrigin:
+                            index % 2 === 0 ? "100% 50%" : "0% 50%",
+                        }}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </section>
   );
 };
 

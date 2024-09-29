@@ -3,31 +3,35 @@ export const projects = [
     title: "Infinite Scroll Video Gallery",
     description:
       "An interactive gallery featuring an infinite scroll of videos with streaming capabilities, providing a seamless viewing experience.",
-    link: "https://infinite-scroll-video-gallery.vercel.app/",
+    deployedLink: "https://infinite-scroll-video-gallery.vercel.app/",
+    githubLink: "https://github.com/username/infinite-scroll-video-gallery",
     tags: ["React", "NodeJS", "TypeScript", "Intersection Observers"],
-    status: "deployed"
+    status: "deployed",
   },
   {
     title: "Portfolio Website",
     description:
       "A personal portfolio website showcasing projects, skills, and contact information.",
-    link: "https://portfolio-beige-nine-60.vercel.app/",
+    deployedLink: "https://portfolio-beige-nine-60.vercel.app/",
+    githubLink: "https://github.com/username/portfolio-website",
     tags: ["React", "TypeScript", "Tailwind CSS", "Framer motion"],
-    status: "deployed"
+    status: "deployed",
   },
   {
     title: "Blog Platform",
     description:
       "A blogging platform with markdown support, user authentication, and an admin panel.",
-    link: "https://github.com/username/blog-platform",
+    deployedLink: "",
+    githubLink: "https://github.com/username/blog-platform",
     tags: ["React", "NodeJS", "Express", "MongoDB"],
-    status: "in-progress"
+    status: "in-progress",
   },
   {
     title: "Task Manager",
     description:
       "A task management tool with drag-and-drop functionality and real-time updates.",
-    link: "https://github.com/username/task-manager",
+    deployedLink: "",
+    githubLink: "https://github.com/username/task-manager",
     tags: ["React", "Redux", "NodeJS", "Express", "MongoDB"],
     status: "in-progress",
   },
@@ -37,7 +41,7 @@ export const skills = [
   "JavaScript",
   "TypeScript",
   "React",
-  "Node.js",
+  "NodeJS",
   "Express",
   "MongoDB",
   "Tailwind CSS",
@@ -48,7 +52,7 @@ export const skills = [
   "Docker",
   "AWS",
   "Redux",
-  "Socket.IO",
+  "Socket",
   "PostgreSQL",
   "Jest",
   "Redis",
