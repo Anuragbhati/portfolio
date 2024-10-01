@@ -29,7 +29,6 @@ import {
 } from "react-icons/si";
 
 const Skills: React.FC = () => {
-  // Define a mapping from skill names to corresponding icons
   const iconMap: { [key: string]: JSX.Element } = {
     JavaScript: <FaJs />,
     TypeScript: <SiTypescript />,
@@ -54,7 +53,6 @@ const Skills: React.FC = () => {
     Redis: <SiRedis />,
     Redux: <SiRedux />,
     Socket: <SiSocketdotio />,
-    // Add more mappings for other skills as needed
   };
 
   const containerVariants = {

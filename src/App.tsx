@@ -112,7 +112,7 @@ const App: React.FC = () => {
               ref: contactRef,
               component: About,
               id: "about",
-              className: "mt-20",
+              className: "mt-0",
             },
             { ref: contactRef, component: Contact, id: "contact" },
           ].map(({ ref, component: Component, id, className }, index) => (

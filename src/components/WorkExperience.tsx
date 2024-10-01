@@ -57,7 +57,7 @@ const WorkExperience: React.FC = () => {
         <AnimatePresence>
           <motion.div className="relative">
             <motion.div
-              className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-400 via-pink-500 to-red-500"
+              className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-400 via-pink-500 to-red-500 hidden md:block"
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ duration: 1, ease: "easeInOut" }}
@@ -71,7 +71,9 @@ const WorkExperience: React.FC = () => {
                 variants={itemVariants}
               >
                 <motion.div
-                  className={`w-5/12 ${index % 2 === 0 ? "pr-8" : "pl-8"}`}
+                  className={`w-full sm:w-5/12 ${
+                    index % 2 === 0 ? "pr-8" : "pl-8"
+                  }`}
                 >
                   <motion.div
                     className="bg-gray-800 rounded-lg p-6 shadow-md mb-6"
@@ -104,18 +106,28 @@ const WorkExperience: React.FC = () => {
                       >
                         <span className="text-gray-300">{responsibility}</span>
                       </motion.div>
-                      <motion.div
-                        className={`absolute top-1/2 ${
-                          index % 2 === 0 ? "-right-12" : "-left-12"
-                        } w-8 h-0.5 bg-pink-500`}
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ delay: 0.3 + idx * 0.1 }}
-                        style={{
-                          transformOrigin:
-                            index % 2 === 0 ? "100% 50%" : "0% 50%",
-                        }}
-                      />
+                      {index % 2 === 0 && (
+                        <motion.div
+                          className={`absolute top-1/2 -right-12 w-8 h-0.5 bg-pink-500 hidden md:block`}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ delay: 0.3 + idx * 0.1 }}
+                          style={{
+                            transformOrigin: "100% 50%",
+                          }}
+                        />
+                      )}
+                      {index % 2 !== 0 && (
+                        <motion.div
+                          className={`absolute top-1/2 -left-12 w-8 h-0.5 bg-pink-500 hidden md:block`}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ delay: 0.3 + idx * 0.1 }}
+                          style={{
+                            transformOrigin: "0% 50%",
+                          }}
+                        />
+                      )}
                     </motion.div>
                   ))}
                 </motion.div>
